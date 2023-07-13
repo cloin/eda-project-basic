@@ -1,0 +1,26 @@
+---
+- name: Listen for birthday wishes posted to a kafka topic
+  hosts: all
+  sources:
+    - ansible.eda.kafka:
+        host: broker
+        port: 9092
+        topic: eda-topic
+        group_id:
+      filters:
+        - cloin.eda.poster:
+            webhook_url:
+            search:
+
+  rules:
+    - name: R1 - Heard "Hello!"
+      condition: event.payload.message == "Hello!"
+      action:
+        debug:
+          msg: "You said, '{{ event.payload.message }}'. Is it me you're looking for?"
+
+    - name: R2 - Didn't hear "Hello!"
+      condition: event.payload.message is defined and event.payload.message != "Hello!"
+      action:
+        debug:
+          msg: "You said, '{{ event.payload.message }}'. Is that what you meant to say?"
