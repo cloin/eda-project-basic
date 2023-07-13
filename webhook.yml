@@ -1,12 +1,10 @@
 ---
-- name: Listen for messages on a kafka topic
+- name: Respond to webhook POST
   hosts: all
   sources:
-    - ansible.eda.kafka:
-        host: broker
-        port: 9092
-        topic: eda-topic
-        group_id:
+    - ansible.eda.webhook:
+        host: 0.0.0.0
+        port: 5000
       filters:
         - cloin.eda.poster:
             webhook_url:
