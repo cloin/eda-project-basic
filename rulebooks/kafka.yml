@@ -24,3 +24,8 @@
       action:
         debug:
           msg: "You said, '{{ event.payload.message }}'. Is that what you meant to say?"
+
+    - name: R3 - Debug
+      condition: event.meta is defined
+      action:
+        debug:
