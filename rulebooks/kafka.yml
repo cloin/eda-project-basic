@@ -3,14 +3,14 @@
   hosts: all
   sources:
     - ansible.eda.kafka:
-        host: broker
-        port: 9092
-        topic: eda-topic
+        host: {{ kafka_host }}
+        port: {{ kafka_port }}
+        topic: {{ kafka_topic }}
         group_id:
       filters:
         - cloin.eda.poster:
-            webhook_url:
-            search:
+            webhook_url: {{ poster_url }}
+            search: {{ poster_search }}
 
   rules:
     - name: R1 - Heard "Hello!"
