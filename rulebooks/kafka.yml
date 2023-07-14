@@ -14,16 +14,16 @@
 
   rules:
     - name: R1 - Heard "Hello!"
-      condition: event.payload.message == "Hello!"
+      condition: event.body.message == "Hello!"
       action:
         debug:
-          msg: "You said, '{{ event.payload.message }}'. Is it me you're looking for?"
+          msg: "You said, '{{ event.body.message }}'. Is it me you're looking for?"
 
     - name: R2 - Didn't hear "Hello!"
-      condition: event.payload.message is defined and event.payload.message != "Hello!"
+      condition: event.body.message is defined and event.body.message != "Hello!"
       action:
         debug:
-          msg: "You said, '{{ event.payload.message }}'. Is that what you meant to say?"
+          msg: "You said, '{{ event.body.message }}'. Is that what you meant to say?"
 
     - name: R3 - Debug
       condition: event.meta is defined
