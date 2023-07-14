@@ -3,14 +3,14 @@
   hosts: all
   sources:
     - ansible.eda.kafka:
-        host: {{ kafka_host }}
-        port: {{ kafka_port }}
-        topic: {{ kafka_topic }}
-        group_id:
+        host: "{{ kafka_host }}"
+        port: "{{ kafka_port }}"
+        topic: "{{ kafka_topic }}"
+        group_id: "{{ kafka_group }}"
       filters:
         - cloin.eda.poster:
-            webhook_url: {{ poster_url }}
-            search: {{ poster_search }}
+            webhook_url: "{{ poster_url }}"
+            search: "{{ poster_search }}"
 
   rules:
     - name: R1 - Heard "Hello!"
