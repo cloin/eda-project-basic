@@ -10,7 +10,6 @@
       filters:
         - cloin.eda.poster:
             webhook_url: "{{ poster_url }}"
-            search: "{{ poster_search }}"
 
   rules:
     - name: R1 - Heard "Hello!"
