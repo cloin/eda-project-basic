@@ -7,9 +7,6 @@
         port: "{{ kafka_port }}"
         topic: "{{ kafka_topic }}"
         group_id: "{{ kafka_group }}"
-      filters:
-        - cloin.eda.poster:
-            webhook_url: "{{ poster_url }}"
 
   rules:
     - name: R1 - Heard "Hello!"
