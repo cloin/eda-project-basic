@@ -1,0 +1,22 @@
+---
+- name: Capture alertmanager alerts
+  hosts: localhost
+  sources:
+    - ansible.eda.alertmanager:
+        host: 0.0.0.0
+        port: 5050
+        data_alerts_path: alerts
+        data_host_path: labels.instance
+        data_path_separator: .
+        skip_original_data: true
+
+  rules:
+    - name: Capture selinux disabled alerts
+      condition: event.alert.labels.alertname == "selinux disabled"
+      action:
+        debug:
+
+    - name: Capture the rest of the alerts
+      condition: event.alert is defined
+      action:
+        debug:
