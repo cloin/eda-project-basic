@@ -1,0 +1,9 @@
+---
+- name: Baseline config for all servers
+  hosts: all
+  tasks:
+
+  - name: Enable SELinux
+    ansible.posix.selinux:
+      policy: targeted
+      state: enforcing
