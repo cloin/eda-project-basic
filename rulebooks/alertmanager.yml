@@ -14,7 +14,9 @@
     - name: Capture selinux disabled alerts
       condition: event.alert.labels.alertname == "selinux disabled"
       action:
-        debug:
+        run_job_template:
+          name: Apply baseline
+          organization: Default
 
     - name: Capture the rest of the alerts
       condition: event.alert is defined
