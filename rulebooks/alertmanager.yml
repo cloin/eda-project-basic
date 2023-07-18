@@ -17,6 +17,8 @@
         run_job_template:
           name: Apply baseline
           organization: Default
+            job_args:
+              limit: "{{ event.meta.hosts }}"
 
     - name: Capture the rest of the alerts
       condition: event.alert is defined
