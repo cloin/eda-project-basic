@@ -11,11 +11,22 @@
         skip_original_data: true
 
   rules:
-    - name: Capture selinux disabled alerts
-      condition: event.alert.labels.alertname == "selinux disabled"
+    - name: SELinux was disabled
+      condition: event.alert.labels.alertname == "selinux disabled" and event.alert.status == "firing"
       action:
         run_job_template:
           name: Apply baseline
           organization: Default
           job_args:
             limit: "{{ event.meta.hosts }}"
+
+    - name: SELinux was enabled
+      condition: event.alert.labels.alertname == "selinux disabled" and event.alert.status == "resolved"
+      action:
+        debug:
+          msg: "enabled on: {{ event.meta.hosts }}"
+
+    - name: Capture all other events from this source
+      condition: event.alert is defined
+      action:
+        debug:
