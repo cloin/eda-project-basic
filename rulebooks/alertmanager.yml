@@ -17,5 +17,5 @@
         run_job_template:
           name: Apply baseline
           organization: Default
-            job_args:
-              limit: "{{ event.meta.hosts }}"
+          job_args:
+            limit: "{{ event.meta.hosts }}"
