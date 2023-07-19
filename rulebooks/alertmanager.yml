@@ -19,8 +19,3 @@
           organization: Default
             job_args:
               limit: "{{ event.meta.hosts }}"
-
-    - name: Capture the rest of the alerts
-      condition: event.alert is defined
-      action:
-        debug:
