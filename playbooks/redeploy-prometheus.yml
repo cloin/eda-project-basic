@@ -6,3 +6,22 @@
   - name: Debug
     ansible.builtin.debug:
       var: ansible_eda
+
+  - name: Stop prometheus with podman-compose
+    ansible.builtin.command: 
+      cmd: podman-compose down
+      chdir: /tmp/eda-alertmanager/prometheus
+
+  - name: Update prometheus project
+    ansible.builtin.git:
+      repo: "http://podman:3000/student/{{ item.item.name }}.git"
+      dest: "/tmp/{{ item.item.name }}"
+      version: "{{ item.branch | default('main') }}"
+      force: true
+    loop:
+      - {item: {name: 'eda-alertmanager'}, branch: 'main'}
+
+  - name: Start prometheus with podman-compose
+    ansible.builtin.command: 
+      cmd: podman-compose up -d
+      chdir: /tmp/eda-alertmanager/prometheus
