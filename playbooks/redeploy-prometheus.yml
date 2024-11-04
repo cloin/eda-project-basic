@@ -12,7 +12,7 @@
       cmd: podman-compose down
       chdir: /tmp/eda-alertmanager/prometheus
 
-  - name: Update prometheus project
+  - name: Update prometheus project on podman host
     ansible.builtin.git:
       repo: "http://podman:3000/student/{{ item.item.name }}.git"
       dest: "/tmp/{{ item.item.name }}"
