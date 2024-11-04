@@ -10,7 +10,9 @@
     - name: Prometheus alert.rules push event
       condition: event.payload.commits is selectattr('modified', 'contains', "prometheus/alert.rules")
       action:
-        debug:
+        run_job_template:
+          name: Redeploy prometheus stack
+          organization: Default
 
     - name: Debug all other events
       condition: true
