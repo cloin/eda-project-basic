@@ -7,6 +7,11 @@
         port: 5000
   
   rules:
+    - name: Prometheus alert.rules push event
+      condition: event.payload.commits is select(contains, "prometheus/alert.rules")
+      action:
+        debug:
+
     - name: Debug all other events
       condition: true
       action:
