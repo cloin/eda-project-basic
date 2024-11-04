@@ -8,7 +8,7 @@
   
   rules:
     - name: Prometheus alert.rules push event
-      condition: event.payload.commits is select(contains, "prometheus/alert.rules")
+      condition: event.payload.commits is select('contains', 'prometheus/alert.rules')
       action:
         debug:
 
