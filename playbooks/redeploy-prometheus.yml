@@ -1,6 +1,6 @@
 ---
 - name: Redeploy prometheus stack
-  hosts: all
+  hosts: podman
   tasks:
 
   - name: Debug
