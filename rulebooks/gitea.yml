@@ -1,0 +1,20 @@
+---
+- name: Respond to Gitea events
+  hosts: all
+  sources:
+    - ansible.eda.webhook:
+        host: 0.0.0.0
+        port: 5000
+  
+  rules:
+    - name: Prometheus alert.rules push event
+      condition: event.payload.commits is selectattr('modified', 'contains', "prometheus/alert.rules")
+      action:
+        run_job_template:
+          name: Redeploy prometheus stack
+          organization: Default
+
+    - name: Debug all other events
+      condition: true
+      action:
+        debug:

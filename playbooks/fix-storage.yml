@@ -1,0 +1,10 @@
+---
+- name: Fix low disk space alert
+  hosts: all
+  tasks:
+
+  - name: Remove /bigfile if it exists
+    ansible.builtin.file:
+      path: /bigfile
+      state: absent
+    become: true
