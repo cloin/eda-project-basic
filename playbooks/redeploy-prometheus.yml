@@ -19,7 +19,7 @@
       version: "{{ item.branch | default('main') }}"
       force: true
     loop:
-      - {item: {name: 'eda-alertmanager'}, branch: 'main'}
+      - {item: {name: 'eda-alertmanager'}, branch: 'aap25'}
 
   - name: Start prometheus with podman-compose
     ansible.builtin.command: 
