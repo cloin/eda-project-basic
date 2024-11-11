@@ -26,10 +26,14 @@
         debug:
           msg: "enabled on: {{ event.meta.hosts }}"
 
-    - name: Capture all other alerts from this source
-      condition: event.alert is defined
+    - name: Disk space alert
+      condition: event.alert.labels.alertname == "RootDiskSpaceLow" and event.alert.status == "firing"
       action:
-        debug:
+        run_job_template:
+          name: Remediate disk space alert
+          organization: Default
+          job_args:
+            limit: "{{ event.meta.hosts }}"
 
     - name: Debug all remaining events
       condition: event.meta is defined
