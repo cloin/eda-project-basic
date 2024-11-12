@@ -11,7 +11,7 @@
         skip_original_data: true
 
   rules:
-    - name: SELinux was disabled
+    - name: SELinux was disabled (firing)
       condition: event.alert.labels.alertname == "selinux disabled" and event.alert.status == "firing"
       action:
         run_job_template:
@@ -20,7 +20,7 @@
           job_args:
             limit: "{{ event.meta.hosts }}"
 
-    - name: SELinux was enabled
+    - name: SELinux was disabled (resolved)
       condition: event.alert.labels.alertname == "selinux disabled" and event.alert.status == "resolved"
       action:
         debug:
