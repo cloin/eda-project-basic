@@ -26,8 +26,17 @@
         debug:
           msg: "enabled on: {{ event.meta.hosts }}"
 
-    - name: Disk space alert
+    - name: Disk space alert (firing)
       condition: event.alert.labels.alertname == "RootDiskSpaceLow" and event.alert.status == "firing"
+      action:
+        run_job_template:
+          name: Remediate disk space alert
+          organization: Default
+          job_args:
+            limit: "{{ event.meta.hosts }}"
+
+    - name: Disk space alert (resolved)
+      condition: event.alert.labels.alertname == "RootDiskSpaceLow" and event.alert.status == "resolved"
       action:
         run_job_template:
           name: Remediate disk space alert
