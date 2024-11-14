@@ -23,8 +23,8 @@
         debug:
           msg: "You said, '{{ event.payload.message }}'. Is that what you meant to say?"
 
-    - name: Debug uncaught events
-      condition: true
+    - name: New request item created
+      condition: event.payload.sys_class_name == "sc_request"
       action:
         debug:
           
