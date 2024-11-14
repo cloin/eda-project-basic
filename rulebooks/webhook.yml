@@ -27,6 +27,6 @@
       condition: event.payload.sys_class_name == "sc_request"
       action:
         run_job_template:
-          name: Lookup ServiceNow REQ
+          name: "Lookup ServiceNow REQ"
           organization: Default
           
