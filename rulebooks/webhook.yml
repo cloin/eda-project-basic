@@ -26,5 +26,7 @@
     - name: New request item created
       condition: event.payload.sys_class_name == "sc_request"
       action:
-        debug:
+        run_job_template:
+          name: Lookup ServiceNow REQ
+          organization: Default
           
