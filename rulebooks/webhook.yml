@@ -22,3 +22,9 @@
       action:
         debug:
           msg: "You said, '{{ event.payload.message }}'. Is that what you meant to say?"
+
+    - name: Debug uncaught events
+      condition: true
+      action:
+        debug:
+          
